@@ -14,7 +14,7 @@ public class PlayerControler : MonoBehaviour {
     public GameObject restartGUI;
 
     public int maxMovingStep = 1;
-    public float distanceMoving = 2.0f;
+    public float distanceMoving = 1.75f;
 
     float stepIntervalY = 1.0f;
     float stepIntervalX = 0.02f;
