@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/EndlessRun/Scenes/EndlessVertical.unity
+    guid: d40e73f85df74184090fd192d7f95631

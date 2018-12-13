@@ -43,7 +43,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: f4bc9f2934b7b4941b0d26d476a19ef7,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -449,12 +450,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1564351782}
-        m_MethodName: 
+      - m_Target: {fileID: 1564351783}
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1038,7 +1039,7 @@ Prefab:
     - target: {fileID: 114427868246853866, guid: 2c2b219e5db072e499efe5154c30895c,
         type: 2}
       propertyPath: distanceMoving
-      value: 120
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114427868246853866, guid: 2c2b219e5db072e499efe5154c30895c,
         type: 2}
@@ -1131,11 +1132,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4332565307275818, guid: 8d95ac93a6085334db4fed936817e5e1,
     type: 2}
   m_PrefabInternal: {fileID: 383098815}
---- !u!1 &1564351782 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1917463946545500, guid: 2c2b219e5db072e499efe5154c30895c,
+--- !u!114 &1564351783 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114427868246853866, guid: 2c2b219e5db072e499efe5154c30895c,
     type: 2}
   m_PrefabInternal: {fileID: 1174268152}
+  m_Script: {fileID: 11500000, guid: 73aed148fb1336143a7110ba7b38154b, type: 3}
 --- !u!1 &1818606360
 GameObject:
   m_ObjectHideFlags: 0

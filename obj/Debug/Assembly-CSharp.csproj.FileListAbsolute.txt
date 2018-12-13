@@ -40,3 +40,7 @@ I:\ProjNote\Unity\ColorSnake\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.
 I:\ProjNote\Unity\ColorSnake\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 I:\ProjNote\Unity\ColorSnake\obj\Debug\Assembly-CSharp.dll
 I:\ProjNote\Unity\ColorSnake\obj\Debug\Assembly-CSharp.pdb
+I:\PROTO\ColorSnake\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+I:\PROTO\ColorSnake\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+I:\PROTO\ColorSnake\obj\Debug\Assembly-CSharp.dll
+I:\PROTO\ColorSnake\obj\Debug\Assembly-CSharp.pdb

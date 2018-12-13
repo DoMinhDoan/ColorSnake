@@ -14,7 +14,7 @@ public class PlayerControler : MonoBehaviour {
     public GameObject restartGUI;
 
     public int maxMovingStep = 1;
-    public int distanceMoving = 100;
+    public float distanceMoving = 2.0f;
 
     float stepIntervalY = 1.0f;
     float stepIntervalX = 0.02f;
@@ -24,6 +24,11 @@ public class PlayerControler : MonoBehaviour {
 
     //Change me to change the touch phase used.
     TouchPhase touchPhase = TouchPhase.Ended;
+
+    // TOUCH    
+    Vector2 firstPressPos;
+    Vector2 secondPressPos;
+    Vector2 currentSwipe;
 
 
     void Start()
@@ -62,22 +67,23 @@ public class PlayerControler : MonoBehaviour {
             }
         }
 
+        int swipeDirection = Swipe();
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || swipeDirection == 2)
         {           
             if(movingOffset > -maxMovingStep)
             {
                 movingOffset--;
-                transform.Translate(Vector3.left * distanceMoving * Time.deltaTime);
+                transform.Translate(Vector3.left * distanceMoving/* * Time.deltaTime*/);
             }
             
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
+        else if (Input.GetKeyUp(KeyCode.RightArrow) || swipeDirection == 3)
         {
             if (movingOffset < maxMovingStep)
             {
                 movingOffset++;
-                transform.Translate(Vector3.right * distanceMoving * Time.deltaTime);
+                transform.Translate(Vector3.right * distanceMoving/* * Time.deltaTime*/);
             }                
         }
 
@@ -142,7 +148,7 @@ public class PlayerControler : MonoBehaviour {
 
     public bool HitObstacle(Material mat, GameObject obstacle)
     {
-        if (players.Count > 1)
+        if (players.Count > 0)
         {
             if( players[0].GetComponent<MeshRenderer>().sharedMaterial.name.Contains(mat.name))
             {                
@@ -194,5 +200,56 @@ public class PlayerControler : MonoBehaviour {
         er.isGameOver = true;
         restartGUI.SetActive(true);
     }
-   
+
+    public int Swipe()
+    {
+        if (Input.touches.Length > 0)
+        {
+            Touch t = Input.GetTouch(0);
+            if (t.phase == TouchPhase.Began)
+            {
+                //save began touch 2d point
+                firstPressPos = new Vector2(t.position.x, t.position.y);
+            }
+            if (t.phase == TouchPhase.Ended)
+            {
+                //save ended touch 2d point
+                secondPressPos = new Vector2(t.position.x, t.position.y);
+
+                //create vector from the two points
+                currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
+
+                //normalize the 2d vector
+                currentSwipe.Normalize();
+
+                //swipe upwards
+                if (currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+                {
+                    Debug.Log("up swipe");
+                    return 0;
+                }
+                //swipe down
+                if (currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+                {
+                    Debug.Log("down swipe");
+                    return 1;
+                }
+                //swipe left
+                if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                {
+                    Debug.Log("left swipe");
+                    return 2;
+                }
+                //swipe right
+                if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                {
+                    Debug.Log("right swipe");
+                    return 3;
+                }
+            }
+        }
+
+        return -1;
+    }
+
 }
