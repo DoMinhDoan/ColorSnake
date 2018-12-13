@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControler : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class PlayerControler : MonoBehaviour {
     public List<GameObject> players;
     public GameObject playerSample;
     public int maxPlayerCount = 5;
+
+    public GameObject restartGUI;
 
     public int maxMovingStep = 1;
     public int distanceMoving = 100;
@@ -88,6 +91,11 @@ public class PlayerControler : MonoBehaviour {
         
     }
 
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     void UpdatePlayerTransformLocationX(float interval)
     {
         for (int i = 0; i < players.Count; i++)
@@ -156,7 +164,7 @@ public class PlayerControler : MonoBehaviour {
                 players.RemoveAll(toRemove.Contains);
                 if(players.Count == 0)
                 {
-                    er.isGameOver = true;
+                    GameOver();
                     return false;
                 }
 
@@ -167,7 +175,7 @@ public class PlayerControler : MonoBehaviour {
             }
             else
             {
-                er.isGameOver = true;
+                GameOver();
                 return false;
             }
         }
@@ -177,8 +185,14 @@ public class PlayerControler : MonoBehaviour {
             return true;
         }
 
-        er.isGameOver = true;
+        GameOver();
         return false;
+    }
+
+    void GameOver()
+    {
+        er.isGameOver = true;
+        restartGUI.SetActive(true);
     }
    
 }
