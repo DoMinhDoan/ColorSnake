@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndlessRun : MonoBehaviour {
+public class MapGeneration : MonoBehaviour {
 
     public List<GameObject> bgList;
     public List<Transform> currentManagedBGList;

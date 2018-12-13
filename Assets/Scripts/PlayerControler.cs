@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerControler : MonoBehaviour {
 
-    public EndlessRun er;
+	public MapGeneration mapGeneration;
 
     public List<GameObject> players;
     public GameObject playerSample;
@@ -94,7 +94,7 @@ public class PlayerControler : MonoBehaviour {
         }        
 
         // update snake transform
-        if (!er.isGameOver && stepIntervalY > 0 && players[0].transform.localPosition.y > 0)
+		if (!mapGeneration.isGameOver && stepIntervalY > 0 && players[0].transform.localPosition.y > 0)
         {
             UpdatePlayerTransformLocationY(stepIntervalY);
 
@@ -203,7 +203,7 @@ public class PlayerControler : MonoBehaviour {
 
     void GameOver()
     {
-        er.isGameOver = true;
+		mapGeneration.isGameOver = true;
         restartGUI.SetActive(true);
     }
 

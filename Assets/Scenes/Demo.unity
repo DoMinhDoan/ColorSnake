@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -88,7 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-  m_LightingDataAsset: {fileID: 112000002, guid: f4bc9f2934b7b4941b0d26d476a19ef7,
+  m_LightingDataAsset: {fileID: 112000002, guid: df9edf8d72b6fbc47ac1495e7021af93,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -245,6 +245,10 @@ Prefab:
     - target: {fileID: 1301218310451220, guid: 493868c3d483efd4a93661d6c63e3111, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301218310451220, guid: 493868c3d483efd4a93661d6c63e3111, type: 2}
+      propertyPath: m_Name
+      value: MapGeneration
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 493868c3d483efd4a93661d6c63e3111, type: 2}
@@ -880,6 +884,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114427868246853866, guid: 2c2b219e5db072e499efe5154c30895c,
+        type: 2}
+      propertyPath: mapGeneration
+      value: 
+      objectReference: {fileID: 1981639963}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c2b219e5db072e499efe5154c30895c, type: 2}
   m_IsPrefabParent: 0
