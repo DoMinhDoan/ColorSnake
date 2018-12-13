@@ -79,7 +79,7 @@ public class PlayerControler : MonoBehaviour {
         }
 
         // update snake transform
-        if (stepIntervalY > 0 && players[0].transform.localPosition.y > 0)
+        if (!er.isGameOver && stepIntervalY > 0 && players[0].transform.localPosition.y > 0)
         {
             UpdatePlayerTransformLocationY(stepIntervalY);
 
