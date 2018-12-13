@@ -37,55 +37,61 @@ public class PlayerControler : MonoBehaviour {
     }
 
     void Update()
-    {
-        //We check if we have more than one touch happening.
-        //We also check if the first touches phase is Ended (that the finger was lifted)
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase) || Input.GetMouseButtonDown(0))
-        {
-            Ray ray;
-            if (Input.touchCount > 0)   // ??? phone
-            {
-                ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            }
-            else
-            {
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            }
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {                
-                GameObject touchedObject = hit.transform.gameObject;
-                if(touchedObject.transform.CompareTag("Player"))
-                {
-                    GameObject first = players[0];
-                    players.RemoveAt(0);
-                    players.Add(first);
-
-                    UpdatePlayerTransformLocationY(0);
-                }                
-            }
-        }
+    {        
 
         int swipeDirection = Swipe();
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || swipeDirection == 2)
-        {           
-            if(movingOffset > -maxMovingStep)
-            {
-                movingOffset--;
-                transform.Translate(Vector3.left * distanceMoving/* * Time.deltaTime*/);
-            }
-            
-        }
-        else if (Input.GetKeyUp(KeyCode.RightArrow) || swipeDirection == 3)
+        if(swipeDirection == -1)
         {
-            if (movingOffset < maxMovingStep)
+            //We check if we have more than one touch happening.
+            //We also check if the first touches phase is Ended (that the finger was lifted)
+            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase) || Input.GetMouseButtonDown(0))
             {
-                movingOffset++;
-                transform.Translate(Vector3.right * distanceMoving/* * Time.deltaTime*/);
-            }                
+                Ray ray;
+                if (Input.touchCount > 0)   // ??? phone
+                {
+                    ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                }
+                else
+                {
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                }
+
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    GameObject touchedObject = hit.transform.gameObject;
+                    if (touchedObject.transform.CompareTag("Player"))
+                    {
+                        GameObject first = players[0];
+                        players.RemoveAt(0);
+                        players.Add(first);
+
+                        UpdatePlayerTransformLocationY(0);
+                    }
+                }
+            }
         }
+        else
+        {
+            if (Input.GetKeyUp(KeyCode.LeftArrow) || swipeDirection == 2)
+            {
+                if (movingOffset > -maxMovingStep)
+                {
+                    movingOffset--;
+                    transform.Translate(Vector3.left * distanceMoving/* * Time.deltaTime*/);
+                }
+
+            }
+            else if (Input.GetKeyUp(KeyCode.RightArrow) || swipeDirection == 3)
+            {
+                if (movingOffset < maxMovingStep)
+                {
+                    movingOffset++;
+                    transform.Translate(Vector3.right * distanceMoving/* * Time.deltaTime*/);
+                }
+            }
+        }        
 
         // update snake transform
         if (!er.isGameOver && stepIntervalY > 0 && players[0].transform.localPosition.y > 0)
