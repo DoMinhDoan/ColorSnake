@@ -32,14 +32,31 @@ public class EndlessRun : MonoBehaviour {
             Destroy(other.gameObject);
 
             Vector3 spawnPos = lastSpawnedBG.transform.position;
-            spawnPos.y += lastSpawnedBG.GetComponent<Collider>().bounds.size.y/2;
 
-
+            spawnPos.y += GetHeightBackground(lastSpawnedBG.gameObject.transform) / 2;
             lastSpawnedBG = Instantiate(bgList[Random.Range(0, bgList.Count)], spawnPos,Quaternion.identity);
-            spawnPos.y += lastSpawnedBG.GetComponent<Collider>().bounds.size.y / 2;
+            spawnPos.y += GetHeightBackground(lastSpawnedBG.gameObject.transform) / 2;
             lastSpawnedBG.transform.position = spawnPos;
 
             currentManagedBGList.Add(lastSpawnedBG.transform);
         }
+    }
+
+    float GetHeightBackground(Transform parent)
+    {
+        float height = 0;
+
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            if (child.CompareTag("BG"))
+            {
+                height = child.gameObject.GetComponent<Collider>().bounds.size.y;
+
+                break;
+            }
+        }
+
+        return height;
     }
 }

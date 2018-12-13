@@ -72,7 +72,7 @@ public class PlayerControler : MonoBehaviour {
                 }
             }
         }
-        else
+        
         {
             if (Input.GetKeyUp(KeyCode.LeftArrow) || swipeDirection == 2)
             {
