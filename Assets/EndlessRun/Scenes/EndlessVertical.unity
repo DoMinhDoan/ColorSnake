@@ -88,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 112000002, guid: f4bc9f2934b7b4941b0d26d476a19ef7,
     type: 2}
   m_UseShadowmask: 1
@@ -127,7 +126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4681357649444110, guid: 7f558bbd459a6054a99ab6dbb17e59c7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 22.8
+      value: 25.75
       objectReference: {fileID: 0}
     - target: {fileID: 4681357649444110, guid: 7f558bbd459a6054a99ab6dbb17e59c7, type: 2}
       propertyPath: m_LocalPosition.z
@@ -218,7 +217,7 @@ Prefab:
     - target: {fileID: 114105154613497868, guid: 493868c3d483efd4a93661d6c63e3111,
         type: 2}
       propertyPath: speedMoving
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114105154613497868, guid: 493868c3d483efd4a93661d6c63e3111,
         type: 2}
@@ -525,7 +524,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -790,7 +788,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4207832543221500, guid: 988d330b9b3da1348bffbd7e94c216ad, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 57.1
+      value: 60.71
       objectReference: {fileID: 0}
     - target: {fileID: 4207832543221500, guid: 988d330b9b3da1348bffbd7e94c216ad, type: 2}
       propertyPath: m_LocalPosition.z

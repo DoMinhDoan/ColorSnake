@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/EndlessRun/Scenes/EndlessVertical.unity
-  isLoaded: 1
-  isActive: 1

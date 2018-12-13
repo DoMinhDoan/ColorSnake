@@ -28,14 +28,23 @@ public class EndlessRun : MonoBehaviour {
     {
         if(other.tag.Equals("BG"))
         {
-            currentManagedBGList.Remove(other.transform);
-            Destroy(other.gameObject);
+			GameObject parent = other.transform.parent.gameObject;
+
+			currentManagedBGList.Remove(parent.transform);
+			Destroy(parent);
 
             Vector3 spawnPos = lastSpawnedBG.transform.position;
 
-            spawnPos.y += GetHeightBackground(lastSpawnedBG.gameObject.transform) / 2;
+			print ("Last Spawned:" + lastSpawnedBG.gameObject.name + " - height = " + GetHeightBackground(lastSpawnedBG.gameObject.transform));
+			float height = GetHeightBackground (lastSpawnedBG.gameObject.transform) / 2.0f;
+			//spawnPos.y += height;
             lastSpawnedBG = Instantiate(bgList[Random.Range(0, bgList.Count)], spawnPos,Quaternion.identity);
-            spawnPos.y += GetHeightBackground(lastSpawnedBG.gameObject.transform) / 2;
+
+			height += GetHeightBackground (lastSpawnedBG.gameObject.transform) / 2.0f;
+
+			print ("Spawning:" + lastSpawnedBG.gameObject.name + " - height = " + GetHeightBackground(lastSpawnedBG.gameObject.transform) + "->Total = " + height);
+
+			spawnPos.y += height;//GetHeightBackground(lastSpawnedBG.gameObject.transform) / 2.0f;
             lastSpawnedBG.transform.position = spawnPos;
 
             currentManagedBGList.Add(lastSpawnedBG.transform);
@@ -56,6 +65,8 @@ public class EndlessRun : MonoBehaviour {
                 break;
             }
         }
+
+		//print ("GetHeightBackground:" + parent.name + " - height = " + height);
 
         return height;
     }
