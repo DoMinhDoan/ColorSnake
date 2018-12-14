@@ -7,6 +7,8 @@ public class PlayerControler : MonoBehaviour {
 
 	public MapGeneration mapGeneration;
 
+    public List<Material> playersMaterialInitialize;
+
     public List<GameObject> players;
     public GameObject playerSample;
     public int maxPlayerCount = 5;
@@ -33,7 +35,19 @@ public class PlayerControler : MonoBehaviour {
 
     void Start()
     {
-        AddPlayerNode(null);        
+        if(playersMaterialInitialize.Count == 0)
+        {
+            AddPlayerNode(null);
+        }
+        else
+        {
+            for(int i = 0; i < playersMaterialInitialize.Count; i++)
+            {                
+                AddPlayerNode(playersMaterialInitialize[i]);
+            }
+
+            UpdatePlayerTransformLocationY(0);
+        }
     }
 
     void Update()
