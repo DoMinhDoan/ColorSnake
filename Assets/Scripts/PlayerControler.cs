@@ -22,16 +22,25 @@ public class PlayerControler : MonoBehaviour {
     float stepIntervalX = 0.02f;
     int movingOffset = 0;
 
-    Vector3 touchPosWorld;
-
     //Change me to change the touch phase used.
     TouchPhase touchPhase = TouchPhase.Ended;
 
     // TOUCH    
-    Vector2 firstPressPos;
-    Vector2 secondPressPos;
-    Vector2 currentSwipe;
+    // The angle range for detecting swipe
+    private const float mAngleRange = 30;
 
+    // To recognize as swipe user should at lease swipe for this many pixels
+    private const float mMinSwipeDist = 50.0f;
+
+    // To recognize as a swipe the velocity of the swipe
+    // should be at least mMinVelocity
+    // Reduce or increase to control the swipe speed
+    private const float mMinVelocity = 2000.0f;
+
+    private Vector2 mStartPosition;
+    private float mSwipeStartTime;
+    private readonly Vector2 mXAxis = new Vector2(1, 0);
+    private readonly Vector2 mYAxis = new Vector2(0, 1);
 
     void Start()
     {
@@ -59,31 +68,14 @@ public class PlayerControler : MonoBehaviour {
         {
             //We check if we have more than one touch happening.
             //We also check if the first touches phase is Ended (that the finger was lifted)
-            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase) || Input.GetMouseButtonDown(0))
-            {
-                Ray ray;
-                if (Input.touchCount > 0)   // ??? phone
-                {
-                    ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                }
-                else
-                {
-                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                }
 
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
-                {
-                    GameObject touchedObject = hit.transform.gameObject;
-                    if (touchedObject.transform.CompareTag("Player"))
-                    {
-                        GameObject first = players[0];
-                        players.RemoveAt(0);
-                        players.Add(first);
+            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase) || Input.GetMouseButtonUp(0))
+            {                
+                GameObject first = players[0];
+                players.RemoveAt(0);
+                players.Add(first);
 
-                        UpdatePlayerTransformLocationY(0);
-                    }
-                }
+                UpdatePlayerTransformLocationY(0);
             }
         }
         
@@ -221,55 +213,75 @@ public class PlayerControler : MonoBehaviour {
         restartGUI.SetActive(true);
     }
 
-    public int Swipe()
+    int Swipe()
     {
-        if (Input.touches.Length > 0)
+        if (Input.GetMouseButtonDown(0))
         {
-            Touch t = Input.GetTouch(0);
-            if (t.phase == TouchPhase.Began)
+            // Record start time and position
+            mStartPosition = new Vector2(Input.mousePosition.x,
+                                         Input.mousePosition.y);
+            mSwipeStartTime = Time.time;
+        }
+
+        // Mouse button up, possible chance for a swipe
+        if (Input.GetMouseButtonUp(0))
+        {
+            float deltaTime = Time.time - mSwipeStartTime;
+
+            Vector2 endPosition = new Vector2(Input.mousePosition.x,
+                                               Input.mousePosition.y);
+            Vector2 swipeVector = endPosition - mStartPosition;
+
+            float velocity = swipeVector.magnitude / deltaTime;
+
+            if (velocity > mMinVelocity &&
+                swipeVector.magnitude > mMinSwipeDist)
             {
-                //save began touch 2d point
-                firstPressPos = new Vector2(t.position.x, t.position.y);
-            }
-            if (t.phase == TouchPhase.Ended)
-            {
-                //save ended touch 2d point
-                secondPressPos = new Vector2(t.position.x, t.position.y);
+                // if the swipe has enough velocity and enough distance
 
-                //create vector from the two points
-                currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
+                swipeVector.Normalize();
 
-                //normalize the 2d vector
-                currentSwipe.Normalize();
+                float angleOfSwipe = Vector2.Dot(swipeVector, mXAxis);
+                angleOfSwipe = Mathf.Acos(angleOfSwipe) * Mathf.Rad2Deg;
 
-                //swipe upwards
-                if (currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+                // Detect left and right swipe
+                if (angleOfSwipe < mAngleRange)
                 {
-                    Debug.Log("up swipe");
-                    return 0;
+                    //OnSwipeRight();
+                    return 3;
                 }
-                //swipe down
-                if (currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+                else if ((180.0f - angleOfSwipe) < mAngleRange)
                 {
-                    Debug.Log("down swipe");
-                    return 1;
-                }
-                //swipe left
-                if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
-                {
-                    Debug.Log("left swipe");
+                    //OnSwipeLeft();
                     return 2;
                 }
-                //swipe right
-                if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                else
                 {
-                    Debug.Log("right swipe");
-                    return 3;
+                    // Detect top and bottom swipe
+                    angleOfSwipe = Vector2.Dot(swipeVector, mYAxis);
+                    angleOfSwipe = Mathf.Acos(angleOfSwipe) * Mathf.Rad2Deg;
+                    if (angleOfSwipe < mAngleRange)
+                    {
+                        //OnSwipeTop();
+
+                        return 0;
+
+                    }
+                    else if ((180.0f - angleOfSwipe) < mAngleRange)
+                    {
+                        //OnSwipeBottom();
+                        return 1;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
                 }
             }
         }
 
         return -1;
     }
+
 
 }
