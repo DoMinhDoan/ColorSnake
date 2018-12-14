@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 114105154613497868, guid: 493868c3d483efd4a93661d6c63e3111,
         type: 3}
       propertyPath: bgList.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114105154613497868, guid: 493868c3d483efd4a93661d6c63e3111,
         type: 3}
@@ -421,6 +421,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1762320703968070, guid: 988d330b9b3da1348bffbd7e94c216ad,
         type: 3}
+    - target: {fileID: 114105154613497868, guid: 493868c3d483efd4a93661d6c63e3111,
+        type: 3}
+      propertyPath: playerControler
+      value: 
+      objectReference: {fileID: 1564351783}
     - target: {fileID: 4305324500424816, guid: 493868c3d483efd4a93661d6c63e3111, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1457,7 +1462,7 @@ PrefabInstance:
     - target: {fileID: 114427868246853866, guid: 2c2b219e5db072e499efe5154c30895c,
         type: 3}
       propertyPath: playersMaterialInitialize.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114427868246853866, guid: 2c2b219e5db072e499efe5154c30895c,
         type: 3}
@@ -1512,6 +1517,11 @@ PrefabInstance:
       propertyPath: playersMaterialInitialize.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4a14e9b35f2a6a94c94c8db364f1c9a9, type: 2}
+    - target: {fileID: 114427868246853866, guid: 2c2b219e5db072e499efe5154c30895c,
+        type: 3}
+      propertyPath: playersMaterialInitialize.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: a41220ebc66acaa439757bdddef15844, type: 2}
     - target: {fileID: 4862482941794962, guid: 2c2b219e5db072e499efe5154c30895c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
