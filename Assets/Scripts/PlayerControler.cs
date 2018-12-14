@@ -162,13 +162,13 @@ public class PlayerControler : MonoBehaviour {
     {
         if (players.Count > 0)
         {
-            if( players[0].GetComponent<MeshRenderer>().sharedMaterial.name.Contains(mat.name))
+            if (mat.name.Contains(players[0].GetComponent<MeshRenderer>().sharedMaterial.name) || players[0].GetComponent<MeshRenderer>().sharedMaterial.name.Contains(mat.name))
             {                
                 var toRemove = new List<GameObject>();
                 for(int i = 0; i < players.Count; i++)
                 {
                     print("Obstacle Hit OK");
-                    if (players[i].GetComponent<MeshRenderer>().sharedMaterial.name.Contains(mat.name))
+                    if (mat.name.Contains(players[i].GetComponent<MeshRenderer>().sharedMaterial.name) || players[i].GetComponent<MeshRenderer>().sharedMaterial.name.Contains(mat.name))
                     {
                         toRemove.Add(players[i]);
                         Destroy(players[i].gameObject);
@@ -182,6 +182,8 @@ public class PlayerControler : MonoBehaviour {
                 players.RemoveAll(toRemove.Contains);
                 if(players.Count == 0)
                 {
+                    print("HitObstacle Player Count = 0");
+
                     GameOver();
                     return false;
                 }
@@ -193,6 +195,8 @@ public class PlayerControler : MonoBehaviour {
             }
             else
             {
+                print("HitObstacle Wrong Material");
+
                 GameOver();
                 return false;
             }
@@ -203,7 +207,6 @@ public class PlayerControler : MonoBehaviour {
             return true;
         }
 
-        GameOver();
         return false;
     }
 
