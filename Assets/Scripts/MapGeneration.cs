@@ -7,6 +7,9 @@ public class MapGeneration : MonoBehaviour {
     public List<GameObject> bgList;
     public List<Transform> currentManagedBGList;
     public GameObject lastSpawnedBG;
+
+    public PlayerControler playerControler;
+
     public bool isGameOver = false;
 
     public float speedMoving = 5.0f;
@@ -34,20 +37,17 @@ public class MapGeneration : MonoBehaviour {
 			Destroy(parent);
 
             Vector3 spawnPos = lastSpawnedBG.transform.position;
-
-			print ("Last Spawned:" + lastSpawnedBG.gameObject.name + " - height = " + GetHeightBackground(lastSpawnedBG.gameObject.transform));
 			float height = GetHeightBackground (lastSpawnedBG.gameObject.transform) / 2.0f;
-			//spawnPos.y += height;
             lastSpawnedBG = Instantiate(bgList[Random.Range(0, bgList.Count)], spawnPos,Quaternion.identity);
 
 			height += GetHeightBackground (lastSpawnedBG.gameObject.transform) / 2.0f;
+            spawnPos.y += height;
 
-			print ("Spawning:" + lastSpawnedBG.gameObject.name + " - height = " + GetHeightBackground(lastSpawnedBG.gameObject.transform) + "->Total = " + height);
-
-			spawnPos.y += height;//GetHeightBackground(lastSpawnedBG.gameObject.transform) / 2.0f;
             lastSpawnedBG.transform.position = spawnPos;
 
             currentManagedBGList.Add(lastSpawnedBG.transform);
+
+            SetObstacleMaterialFollowingPlayer(lastSpawnedBG.gameObject.transform);
         }
     }
 
@@ -66,8 +66,21 @@ public class MapGeneration : MonoBehaviour {
             }
         }
 
-		//print ("GetHeightBackground:" + parent.name + " - height = " + height);
-
         return height;
+    }
+
+    void SetObstacleMaterialFollowingPlayer(Transform parent)
+    {
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            if (child.CompareTag("Obstacles"))
+            {
+                int randomMaterial = Random.Range(0, playerControler.players.Count);
+                Material mat = playerControler.players[randomMaterial].GetComponent<MeshRenderer>().material;
+
+                child.gameObject.GetComponent<MeshRenderer>().material = mat;
+            }
+        }
     }
 }
