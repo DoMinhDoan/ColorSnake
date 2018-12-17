@@ -31,6 +31,7 @@ public class PlayerControler : MonoBehaviour {
 
     // To recognize as swipe user should at lease swipe for this many pixels
     private const float mMinSwipeDist = 50.0f;
+    private const float mTouchDist = 10.0f;
 
     // To recognize as a swipe the velocity of the swipe
     // should be at least mMinVelocity
@@ -60,8 +61,7 @@ public class PlayerControler : MonoBehaviour {
     }
 
     void Update()
-    {        
-
+    {   
         int swipeDirection = Swipe();
 
         if(swipeDirection == -1)
@@ -69,7 +69,7 @@ public class PlayerControler : MonoBehaviour {
             //We check if we have more than one touch happening.
             //We also check if the first touches phase is Ended (that the finger was lifted)
 
-            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase) || Input.GetMouseButtonUp(0))
+            if (/*(Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase) ||*/ Input.GetMouseButtonUp(0))
             {                
                 GameObject first = players[0];
                 players.RemoveAt(0);
@@ -80,7 +80,7 @@ public class PlayerControler : MonoBehaviour {
         }
         
         {
-            if (Input.GetKeyUp(KeyCode.LeftArrow) || swipeDirection == 2)
+            if (Input.GetKeyUp(KeyCode.LeftArrow) || swipeDirection == 3)
             {
                 if (movingOffset > -maxMovingStep)
                 {
@@ -89,7 +89,7 @@ public class PlayerControler : MonoBehaviour {
                 }
 
             }
-            else if (Input.GetKeyUp(KeyCode.RightArrow) || swipeDirection == 3)
+            else if (Input.GetKeyUp(KeyCode.RightArrow) || swipeDirection == 4)
             {
                 if (movingOffset < maxMovingStep)
                 {
@@ -251,12 +251,12 @@ public class PlayerControler : MonoBehaviour {
                 if (angleOfSwipe < mAngleRange)
                 {
                     //OnSwipeRight();
-                    return 3;
+                    return 4;
                 }
                 else if ((180.0f - angleOfSwipe) < mAngleRange)
                 {
                     //OnSwipeLeft();
-                    return 2;
+                    return 3;
                 }
                 else
                 {
@@ -267,19 +267,28 @@ public class PlayerControler : MonoBehaviour {
                     {
                         //OnSwipeTop();
 
-                        return 0;
+                        return 1;
 
                     }
                     else if ((180.0f - angleOfSwipe) < mAngleRange)
                     {
                         //OnSwipeBottom();
-                        return 1;
+                        return 2;
                     }
                     else
                     {
                         return -1;
                     }
                 }
+            }
+            else if (velocity < mMinVelocity ||
+                 swipeVector.magnitude > mTouchDist)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
             }
         }
 
