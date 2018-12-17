@@ -31,7 +31,7 @@ public class PlayerControler : MonoBehaviour {
 
     // To recognize as swipe user should at lease swipe for this many pixels
     private const float mMinSwipeDist = 50.0f;
-    private const float mTouchDist = 10.0f;
+    public float maxTouchDist = 10.0f; 
 
     // To recognize as a swipe the velocity of the swipe
     // should be at least mMinVelocity
@@ -281,8 +281,7 @@ public class PlayerControler : MonoBehaviour {
                     }
                 }
             }
-            else if (velocity < mMinVelocity ||
-                 swipeVector.magnitude > mTouchDist)
+            else if (swipeVector.magnitude < maxTouchDist) //need to change color
             {
                 return -1;
             }
