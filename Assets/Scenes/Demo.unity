@@ -1254,6 +1254,11 @@ PrefabInstance:
       propertyPath: maxPlayerCount
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114427868246853866, guid: 2c2b219e5db072e499efe5154c30895c,
+        type: 3}
+      propertyPath: mMinSwipeDist
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4862482941794962, guid: 2c2b219e5db072e499efe5154c30895c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1409,10 +1414,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RandomBG_2
       objectReference: {fileID: 0}
-    - target: {fileID: 1032815603044198, guid: 7f558bbd459a6054a99ab6dbb17e59c7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4681357649444110, guid: 7f558bbd459a6054a99ab6dbb17e59c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1456,6 +1457,10 @@ PrefabInstance:
     - target: {fileID: 4681357649444110, guid: 7f558bbd459a6054a99ab6dbb17e59c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032815603044198, guid: 7f558bbd459a6054a99ab6dbb17e59c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f558bbd459a6054a99ab6dbb17e59c7, type: 3}
