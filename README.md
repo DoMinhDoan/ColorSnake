@@ -40,3 +40,5 @@ Or install the apk inside Bin\Android\
 ## Special Thanks
 
 This section lists people who have contributed to this project by writing code, improving documentation or fixing bugs.
+
+* Nam GD for good concept.
